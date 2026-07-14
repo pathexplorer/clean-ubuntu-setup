@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Terminate script execution if any command fails
-set -e
+set -eo pipefail
+export DEBIAN_FRONTEND=noninteractive
 
 echo "=== 1. System update and installation of basic utilities ==="
 sudo apt update
@@ -16,7 +16,7 @@ curl -fsSL https://fnm.vercel.app/install | bash
 
 # Activate FNM in the current script session
 export PATH="$HOME/.local/share/fnm:$PATH"
-eval "`fnm env`"
+eval "$(fnm env)"
 
 fnm install --lts
 fnm use lts-latest
